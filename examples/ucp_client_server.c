@@ -398,39 +398,40 @@ fill_request_param(ucp_dt_iov_t *iov, int is_client,
  * The client sends a message to the server and waits until the send it completed.
  * The server receives a message from the client and waits for its completion.
  */
-static int send_recv_stream(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
-                            int current_iter)
-{
-    ucp_dt_iov_t *iov = alloca(iov_cnt * sizeof(ucp_dt_iov_t));
-    ucp_request_param_t param;
-    test_req_t *request;
-    size_t msg_length;
-    void *msg;
-    test_req_t ctx;
 
-    memset(iov, 0, iov_cnt * sizeof(*iov));
+//static int send_recv_stream(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
+//                            int current_iter)
+//{
+//    ucp_dt_iov_t *iov = alloca(iov_cnt * sizeof(ucp_dt_iov_t));
+//    ucp_request_param_t param;
+//    test_req_t *request;
+//    size_t msg_length;
+//    void *msg;
+//    test_req_t ctx;
 
-    if (fill_request_param(iov, !is_server, &msg, &msg_length,
-                           &ctx, &param) != 0) {
-        return -1;
-    }
+//    memset(iov, 0, iov_cnt * sizeof(*iov));
 
-    if (!is_server) {
+//    if (fill_request_param(iov, !is_server, &msg, &msg_length,
+//                           &ctx, &param) != 0) {
+//        return -1;
+//    }
+
+//    if (!is_server) {
         /* Client sends a message to the server using the stream API */
-        param.cb.send = send_cb;
-        request       = ucp_stream_send_nbx(ep, msg, msg_length, &param);
-    } else {
-        /* Server receives a message from the client using the stream API */
-        param.op_attr_mask  |= UCP_OP_ATTR_FIELD_FLAGS;
-        param.flags          = UCP_STREAM_RECV_FLAG_WAITALL;
-        //param.cb.recv_stream = stream_recv_cb; -------------MODIFIED-------------------
-        request              = ucp_stream_recv_nbx(ep, msg, msg_length,
-                                                   &msg_length, &param);
-    }
+//        param.cb.send = send_cb;
+//        request       = ucp_stream_send_nbx(ep, msg, msg_length, &param);
+//    } else {
+//        /* Server receives a message from the client using the stream API */
+//        param.op_attr_mask  |= UCP_OP_ATTR_FIELD_FLAGS;
+//        param.flags          = UCP_STREAM_RECV_FLAG_WAITALL;
+//        //param.cb.recv_stream = stream_recv_cb; -------------MODIFIED-------------------
+//        request              = ucp_stream_recv_nbx(ep, msg, msg_length,
+//                                                   &msg_length, &param);
+//    }
 
-    return request_finalize(ucp_worker, request, &ctx, is_server, iov,
-                            current_iter);
-}
+//    return request_finalize(ucp_worker, request, &ctx, is_server, iov,
+//                            current_iter);
+//}
 
 /**
  * Send and receive a message using the Tag-Matching API.
