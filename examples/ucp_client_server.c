@@ -161,13 +161,13 @@ static void tag_recv_cb(void *request, ucs_status_t status,
  * The callback on the receiving side, which is invoked upon receiving the
  * stream message.
  */
-//--------------------------MODIFIED------------------------------------
+//--------------------------MODIFIED-----------------------------------------------
 //static void stream_recv_cb(void *request, ucs_status_t status, size_t length,
   //                         void *user_data)
 //{
   //  common_cb(user_data, "stream_recv_cb");
 //}
-//-------------------------MODIFIED-------------------------------------
+//-------------------------MODIFIED------------------------------------------------
 /**
  * The callback on the receiving side, which is invoked upon receiving the
  * active message.
