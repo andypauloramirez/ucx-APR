@@ -1037,7 +1037,7 @@ static int init_context(ucp_context_h *ucp_context, ucp_worker_h *ucp_worker,
     /* UCP initialization */
     ucp_params.field_mask = UCP_PARAM_FIELD_FEATURES;
 
-    //if (send_recv_type == CLIENT_SERVER_SEND_RECV_STREAM) { //-------MODIFICADO-------
+    //if (send_recv_type == CLIENT_SERVER_SEND_RECV_STREAM) { //-------MODIFICADO------
        // ucp_params.features = UCP_FEATURE_STREAM;
     //} 
       if (send_recv_type == CLIENT_SERVER_SEND_RECV_TAG) {
