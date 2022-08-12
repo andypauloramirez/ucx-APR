@@ -423,7 +423,7 @@ static int send_recv_stream(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
         /* Server receives a message from the client using the stream API */
         param.op_attr_mask  |= UCP_OP_ATTR_FIELD_FLAGS;
         param.flags          = UCP_STREAM_RECV_FLAG_WAITALL;
-        param.cb.recv_stream = stream_recv_cb;
+        //param.cb.recv_stream = stream_recv_cb; -------------MODIFIED-------------------
         request              = ucp_stream_recv_nbx(ep, msg, msg_length,
                                                    &msg_length, &param);
     }
@@ -1037,7 +1037,7 @@ static int init_context(ucp_context_h *ucp_context, ucp_worker_h *ucp_worker,
     /* UCP initialization */
     ucp_params.field_mask = UCP_PARAM_FIELD_FEATURES;
 
-    //if (send_recv_type == CLIENT_SERVER_SEND_RECV_STREAM) {
+    //if (send_recv_type == CLIENT_SERVER_SEND_RECV_STREAM) { //-------MODIFICADO-------
        // ucp_params.features = UCP_FEATURE_STREAM;
     //} 
       if (send_recv_type == CLIENT_SERVER_SEND_RECV_TAG) {
@@ -1078,7 +1078,7 @@ int main(int argc, char **argv)
     ucp_context_h ucp_context;
     ucp_worker_h  ucp_worker;
     
-    printf("Hello world! prueba del fork prueba\n");
+    printf("Hello world! prueba del fork prueba #3\n");
 
     ret = parse_cmd(argc, argv, &server_addr, &listen_addr, &send_recv_type);
     if (ret != 0) {
