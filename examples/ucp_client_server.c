@@ -167,7 +167,7 @@ static void tag_recv_cb(void *request, ucs_status_t status,
 //{
   //  common_cb(user_data, "stream_recv_cb");
 //}
-//-------------------------MODIFIED
+//-------------------------MODIFIED-------------------------------------
 /**
  * The callback on the receiving side, which is invoked upon receiving the
  * active message.
@@ -1078,7 +1078,7 @@ int main(int argc, char **argv)
     ucp_context_h ucp_context;
     ucp_worker_h  ucp_worker;
     
-    printf("Hello world! prueba del fork\n")
+    printf("Hello world! prueba del fork prueba\n")
 
     ret = parse_cmd(argc, argv, &server_addr, &listen_addr, &send_recv_type);
     if (ret != 0) {
