@@ -418,7 +418,7 @@ fill_request_param(ucp_dt_iov_t *iov, int is_client,
 
 *    if (!is_server) {
         * Client sends a message to the server using the stream API *
-/**
+*
 *        param.cb.send = send_cb;
 *        request       = ucp_stream_send_nbx(ep, msg, msg_length, &param);
 *    } else {
@@ -596,7 +596,7 @@ static void usage()
                     DEFAULT_PORT);
     fprintf(stderr, "  -c Communication type for the client and server. "
                     "  Valid values are:\n"
-                 //   "      'stream' : Stream API\n"
+                 /*   "      'stream' : Stream API\n" */
                     "      'tag'    : Tag API\n"
                     "      'am'     : AM API\n"
                     "     If not specified, %s API will be used.\n", COMM_TYPE_DEFAULT);
