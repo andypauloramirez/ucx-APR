@@ -417,12 +417,12 @@ fill_request_param(ucp_dt_iov_t *iov, int is_client,
 *    }
 
 *    if (!is_server) {
-        /* Client sends a message to the server using the stream API */
+        * Client sends a message to the server using the stream API *
 /**
 *        param.cb.send = send_cb;
 *        request       = ucp_stream_send_nbx(ep, msg, msg_length, &param);
 *    } else {
-*        /* Server receives a message from the client using the stream API */
+*         Server receives a message from the client using the stream API **/
 /**        param.op_attr_mask  |= UCP_OP_ATTR_FIELD_FLAGS;
 *        param.flags          = UCP_STREAM_RECV_FLAG_WAITALL;
 *        param.cb.recv_stream = stream_recv_cb; -------------MODIFIED-------------------
@@ -732,7 +732,7 @@ static int client_server_communication(ucp_worker_h worker, ucp_ep_h ep,
     int ret;
 
     switch (send_recv_type) {
-    /*case CLIENT_SERVER_SEND_RECV_STREAM:
+    /*case CLIENT_SERVER_SEND_RECV_STREAM:*/
         /* Client-Server communication via Stream API */
       /*  ret = send_recv_stream(worker, ep, is_server, current_iter);      //----------MODIFIED--------------
         break;*/
@@ -1041,9 +1041,9 @@ static int init_context(ucp_context_h *ucp_context, ucp_worker_h *ucp_worker,
     /* UCP initialization */
     ucp_params.field_mask = UCP_PARAM_FIELD_FEATURES;
 
-    /*if (send_recv_type == CLIENT_SERVER_SEND_RECV_STREAM) { //-------MODIFIED------
-        ucp_params.features = UCP_FEATURE_STREAM;
-    }*/ 
+    /**if (send_recv_type == CLIENT_SERVER_SEND_RECV_STREAM) { //-------MODIFIED------
+    *    ucp_params.features = UCP_FEATURE_STREAM;
+    }**/ 
       if (send_recv_type == CLIENT_SERVER_SEND_RECV_TAG) { /*---------elseif en tag-----*/
         ucp_params.features = UCP_FEATURE_TAG;
     } else {
@@ -1082,7 +1082,7 @@ int main(int argc, char **argv)
     ucp_context_h ucp_context;
     ucp_worker_h  ucp_worker;
     
-    printf("Hello world! prueba del fork prueba #14\n");
+    printf("Hello world! prueba del fork prueba #15\n");
 
     ret = parse_cmd(argc, argv, &server_addr, &listen_addr, &send_recv_type);
     if (ret != 0) {
