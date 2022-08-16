@@ -729,10 +729,10 @@ static int client_server_communication(ucp_worker_h worker, ucp_ep_h ep,
     int ret;
 
     switch (send_recv_type) {
-    case CLIENT_SERVER_SEND_RECV_STREAM:
-        /* Client-Server communication via Stream API */
-        ret = send_recv_stream(worker, ep, is_server, current_iter);
-        break;
+   // case CLIENT_SERVER_SEND_RECV_STREAM:
+        /* Client-Server communication via Stream API */          /////--------------MODIFICADO STREAM----------------
+     //   ret = send_recv_stream(worker, ep, is_server, current_iter);
+      //  break;
     case CLIENT_SERVER_SEND_RECV_TAG:
         /* Client-Server communication via Tag-Matching API */
         ret = send_recv_tag(worker, ep, is_server, current_iter);
