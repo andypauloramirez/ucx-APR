@@ -55,7 +55,7 @@ static int num_iterations      = DEFAULT_NUM_ITERATIONS;
 
 
 typedef enum {
-   // CLIENT_SERVER_SEND_RECV_STREAM  = UCS_BIT(0),
+   /* CLIENT_SERVER_SEND_RECV_STREAM  = UCS_BIT(0), */
     CLIENT_SERVER_SEND_RECV_TAG     = UCS_BIT(0),                     //----------MODIFIED IBA 1
     CLIENT_SERVER_SEND_RECV_AM      = UCS_BIT(1),                     //----------MODIFIED IBA 2  
     CLIENT_SERVER_SEND_RECV_DEFAULT = CLIENT_SERVER_SEND_RECV_TAG     //----------MODIFIED
