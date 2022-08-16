@@ -85,12 +85,15 @@ typedef struct test_req {
 /**
  * Descriptor of the data received with AM API.
  */
-static struct {
-    volatile int complete;
-    int          is_rndv;
-    void         *desc;
-    void         *recv_buf;
-} am_data_desc = {0, 0, NULL, NULL};
+/**
+*static struct {
+*    volatile int complete;
+*    int          is_rndv;
+*    void         *desc;
+*    void         *recv_buf;
+} **/ 
+
+/* am_data_desc = {0, 0, NULL, NULL}; ----------MODIFIED AM------------*/ 
 
 
 /**
@@ -167,11 +170,14 @@ static void tag_recv_cb(void *request, ucs_status_t status,
 *{
   *  common_cb(user_data, "stream_recv_cb");
 *}
-**/ /*-------------------------MODIFIED------------------------------------------------*/
+**/ 
+
+/*-------------------------MODIFIED------------------------------------------------*/
+
 /**
  * The callback on the receiving side, which is invoked upon receiving the
  * active message.
- */
+ **/
  /** --------------MODIFIED AM -----------------------------------
 *static void am_recv_cb(void *request, ucs_status_t status, size_t length,
 *                       void *user_data)
@@ -493,9 +499,9 @@ static int send_recv_tag(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
 *        fprintf(stderr, "received unexpected header, length %ld", header_length);
 *    }
 
-*    am_data_desc.complete = 1;
+    /* am_data_desc.complete = 1; */
 
-*    if (param->recv_attr & UCP_AM_RECV_ATTR_FLAG_RNDV) {
+    /* if (param->recv_attr & UCP_AM_RECV_ATTR_FLAG_RNDV) { */
         /* Rendezvous request arrived, data contains an internal UCX descriptor,
          * which has to be passed to ucp_am_recv_data_nbx function to confirm
          * data transfer.
@@ -1102,7 +1108,7 @@ int main(int argc, char **argv)
     ucp_context_h ucp_context;
     ucp_worker_h  ucp_worker;
     
-    printf("Hello world! prueba del fork prueba #16\n");
+    printf("Hello world! prueba del fork prueba #18\n");
 
     ret = parse_cmd(argc, argv, &server_addr, &listen_addr, &send_recv_type);
     if (ret != 0) {
