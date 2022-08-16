@@ -162,11 +162,11 @@ static void tag_recv_cb(void *request, ucs_status_t status,
  * stream message.
  */
 //--------------------------MODIFIED-----------------------------------------------
-//static void stream_recv_cb(void *request, ucs_status_t status, size_t length,
-  //                         void *user_data)
-//{
-  //  common_cb(user_data, "stream_recv_cb");
-//}
+static void stream_recv_cb(void *request, ucs_status_t status, size_t length,
+                           void *user_data)
+{
+    common_cb(user_data, "stream_recv_cb");
+}
 //-------------------------MODIFIED------------------------------------------------
 /**
  * The callback on the receiving side, which is invoked upon receiving the
@@ -398,41 +398,41 @@ fill_request_param(ucp_dt_iov_t *iov, int is_client,
  * The client sends a message to the server and waits until the send it completed.
  * The server receives a message from the client and waits for its completion.
  */
+//-------------------------------------------------------------------------------------------------
+static int send_recv_stream(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
+                            int current_iter)
+{
+    ucp_dt_iov_t *iov = alloca(iov_cnt * sizeof(ucp_dt_iov_t));
+    ucp_request_param_t param;
+    test_req_t *request;
+    size_t msg_length;
+    void *msg;
+    test_req_t ctx;
 
-//static int send_recv_stream(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
-//                            int current_iter)
-//{
-//    ucp_dt_iov_t *iov = alloca(iov_cnt * sizeof(ucp_dt_iov_t));
-//    ucp_request_param_t param;
-//    test_req_t *request;
-//    size_t msg_length;
-//    void *msg;
-//    test_req_t ctx;
+    memset(iov, 0, iov_cnt * sizeof(*iov));
 
-//    memset(iov, 0, iov_cnt * sizeof(*iov));
+    if (fill_request_param(iov, !is_server, &msg, &msg_length,
+                           &ctx, &param) != 0) {
+        return -1;
+    }
 
-//    if (fill_request_param(iov, !is_server, &msg, &msg_length,
-//                           &ctx, &param) != 0) {
-//        return -1;
-//    }
-
-//    if (!is_server) {
+    if (!is_server) {
         /* Client sends a message to the server using the stream API */
-//        param.cb.send = send_cb;
-//        request       = ucp_stream_send_nbx(ep, msg, msg_length, &param);
-//    } else {
-//        /* Server receives a message from the client using the stream API */
-//        param.op_attr_mask  |= UCP_OP_ATTR_FIELD_FLAGS;
-//        param.flags          = UCP_STREAM_RECV_FLAG_WAITALL;
-//        //param.cb.recv_stream = stream_recv_cb; -------------MODIFIED-------------------
-//        request              = ucp_stream_recv_nbx(ep, msg, msg_length,
-//                                                   &msg_length, &param);
-//    }
+        param.cb.send = send_cb;
+        request       = ucp_stream_send_nbx(ep, msg, msg_length, &param);
+    } else {
+        /* Server receives a message from the client using the stream API */
+        param.op_attr_mask  |= UCP_OP_ATTR_FIELD_FLAGS;
+        param.flags          = UCP_STREAM_RECV_FLAG_WAITALL;
+        param.cb.recv_stream = stream_recv_cb; //-------------MODIFIED-------------------
+        request              = ucp_stream_recv_nbx(ep, msg, msg_length,
+                                                   &msg_length, &param);
+   }
 
-//    return request_finalize(ucp_worker, request, &ctx, is_server, iov,
-//                            current_iter);
-//}
-
+    return request_finalize(ucp_worker, request, &ctx, is_server, iov,
+                            current_iter);
+}
+//---------------------------------------------------------------------------------------------------
 /**
  * Send and receive a message using the Tag-Matching API.
  * The client sends a message to the server and waits until the send it completed.
@@ -1038,9 +1038,9 @@ static int init_context(ucp_context_h *ucp_context, ucp_worker_h *ucp_worker,
     /* UCP initialization */
     ucp_params.field_mask = UCP_PARAM_FIELD_FEATURES;
 
-    //if (send_recv_type == CLIENT_SERVER_SEND_RECV_STREAM) { //-------MODIFICADO------
-       // ucp_params.features = UCP_FEATURE_STREAM;
-    //} 
+    if (send_recv_type == CLIENT_SERVER_SEND_RECV_STREAM) { //-------MODIFICADO------
+        ucp_params.features = UCP_FEATURE_STREAM;
+    } 
       if (send_recv_type == CLIENT_SERVER_SEND_RECV_TAG) {
         ucp_params.features = UCP_FEATURE_TAG;
     } else {
@@ -1079,7 +1079,7 @@ int main(int argc, char **argv)
     ucp_context_h ucp_context;
     ucp_worker_h  ucp_worker;
     
-    printf("Hello world! prueba del fork prueba #8\n");
+    printf("Hello world! prueba del fork prueba #9\n");
 
     ret = parse_cmd(argc, argv, &server_addr, &listen_addr, &send_recv_type);
     if (ret != 0) {
