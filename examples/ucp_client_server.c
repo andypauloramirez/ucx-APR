@@ -41,7 +41,7 @@
 #define IP_STRING_LEN          50
 #define PORT_STRING_LEN        8
 #define TAG                    0xCAFE
-#define COMM_TYPE_DEFAULT      "STREAM"                               //-------------MODIFIED IBA STREAM
+#define COMM_TYPE_DEFAULT      "STREAM"                               
 #define PRINT_INTERVAL         2000
 #define DEFAULT_NUM_ITERATIONS 1
 #define TEST_AM_ID             0
