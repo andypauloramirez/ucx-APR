@@ -936,7 +936,7 @@ static int run_server(ucp_context_h ucp_context, ucp_worker_h ucp_worker,
 {
     ucx_server_ctx_t context;
     ucp_worker_h     ucp_data_worker;
-    ucp_am_handler_param_t param;
+    /* ucp_am_handler_param_t param; */
     ucp_ep_h         server_ep;
     ucs_status_t     status;
     int              ret;
