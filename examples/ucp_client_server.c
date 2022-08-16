@@ -497,15 +497,15 @@ static int send_recv_tag(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
 
 *    if (header_length != 0) {
 *        fprintf(stderr, "received unexpected header, length %ld", header_length);
-*    }
-
+    }
+**/
     /* am_data_desc.complete = 1; */
 
     /* if (param->recv_attr & UCP_AM_RECV_ATTR_FLAG_RNDV) { */
-        /* Rendezvous request arrived, data contains an internal UCX descriptor,
+        /** Rendezvous request arrived, data contains an internal UCX descriptor,
          * which has to be passed to ucp_am_recv_data_nbx function to confirm
          * data transfer.
-         **/
+        **/
 /**
 *        am_data_desc.is_rndv = 1;
 *        am_data_desc.desc    = data;
@@ -538,7 +538,7 @@ static int send_recv_tag(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
  * initiates receive operation.
  **/
 
- /**
+/**
 *static int send_recv_am(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
 *                        int current_iter)
 *{
@@ -558,7 +558,7 @@ static int send_recv_tag(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
 
 *    if (is_server) {
 *        am_data_desc.recv_buf = iov;
-
+**/
         /* waiting for AM callback has called */
 /**        
 *        while (!am_data_desc.complete) {
@@ -586,7 +586,8 @@ static int send_recv_tag(ucp_worker_h ucp_worker, ucp_ep_h ep, int is_server,
 /** 
 *            request = NULL;
 *        }
-*    } else {
+*    } else { 
+**/
         /* Client sends a message to the server using the AM API */
 /**        
 *        params.cb.send = (ucp_send_nbx_callback_t)send_cb,
@@ -653,8 +654,8 @@ static int parse_cmd(int argc, char *const argv[], char **server_addr,
                 *send_recv_type = CLIENT_SERVER_SEND_RECV_TAG;
             } /* else if (!strcasecmp(optarg, "am")) {
                 *send_recv_type = CLIENT_SERVER_SEND_RECV_AM;
-            */
-            } else {
+            }*/ 
+             else {
                 fprintf(stderr, "Wrong communication type %s. "
                         "Using %s as default\n", optarg, COMM_TYPE_DEFAULT);
                 *send_recv_type = CLIENT_SERVER_SEND_RECV_DEFAULT;
@@ -1108,7 +1109,7 @@ int main(int argc, char **argv)
     ucp_context_h ucp_context;
     ucp_worker_h  ucp_worker;
     
-    printf("Hello world! prueba del fork prueba #18\n");
+    printf("Hello world! prueba del fork prueba #19\n");
 
     ret = parse_cmd(argc, argv, &server_addr, &listen_addr, &send_recv_type);
     if (ret != 0) {
